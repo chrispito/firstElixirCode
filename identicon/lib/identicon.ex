@@ -10,7 +10,7 @@ defmodule Identicon do
   end
 
   def save_image(image, filename) do
-    File.write("#{filename}.png", image)
+    File.write("Pictures/#{filename}.png", image)
   end
 
   def build_pixel_map(%Identicon.Image{grid: grid, color: color} = image) do
