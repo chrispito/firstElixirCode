@@ -1,0 +1,24 @@
+<div class="row topics-creation">
+  <div class="col-md-12 head">
+    <h2>Editing a Topic</h2>
+    <%= link to: topics_path(@conn, :index), class: "btn lime" do %>
+      Cancel
+    <%= end %>
+  </div>
+  <div class="col-md-12">
+  <%= form_for @changeset, topics_path(@conn, :update, @topic), fn f -> %>
+    <div class="form-group">
+      <div class="input-field col-md-12">
+          <%= text_input f, :title, placeholder: "Title", class: @title_class %>
+          <%= content_tag(:label, "Title", [{:data, [error: @title_error]}]) %>
+      </div>
+      <div class="input-field col-md-12">
+        <%= textarea f, :description, placeholder: "Description", class: @desc_class %>
+        <%= content_tag(:label, "Description", [{:data, [error: @desc_error]}]) %>
+      </div>
+
+      <%= content_tag(:button, "Update!", type: "submit", class: "btn")  %>
+    </div>
+  <% end %>
+  </div>
+</div>

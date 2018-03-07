@@ -1,0 +1,36 @@
+<div id="topics-list">
+<div class="topics-list-header">
+    <h3>List of Topics</h3>
+        <%= link to: topics_path(@conn, :new), class: "btn" do %>
+            <i class="fas fa-plus-circle"></i>
+            Create a New Topic!
+        <%= end %>
+</div>
+<div class="topics-list-container">
+    <ul class="collapsible popout" data-collapsible="accordion">
+        <%= for topic <- @topics do %>
+            <li>
+                <div class="collapsible-header">
+                    <div>
+                        <span class="topic-item icon"><i class="fas fa-tasks"></i></span>
+                        <span class="topic-item title"><%= topic.title %></span>
+                    </div>
+                    <div>
+                        <%= link to: topics_path(@conn, :edit, topic), class: "btn-floating btn red" do %>
+                            <i class="material-icons">mode_edit</i>
+                        <%= end %>
+                        <%= link to: topics_path(@conn, :delete, topic), method: :delete, class: "btn-floating btn red" do %>
+                            <i class="material-icons">close</i>
+                        <%= end %>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <span class="topic-item description">
+                        <%= topic.description %>
+                    </span>
+                </div>
+            </li>
+        <% end %>
+    </ul>
+</div>
+</div>

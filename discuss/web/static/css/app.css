@@ -1,1 +1,56 @@
-/* This file is for your main application css. */
+/* @import 'node_modules/font-awesome/scss/font-awesome' */
+
+
+.container {
+    max-width: 100%;
+    width: 100%;
+}
+main {
+    max-width: 1150px;
+    margin: auto;
+}
+.topics-list-header > * {
+    margin: auto 0;
+}
+.topics-list-header {
+    display: flex;
+    justify-content: space-between;
+}
+.topics-list-container {
+    margin-top: 15px;
+}
+.topic-item.icon {
+    margin-right: 5px;
+}
+.topics-creation > .head {
+    display: flex;
+    justify-content: space-between;
+}
+.head > a {
+    margin: auto 0;
+}
+.topics-creation label {
+    width: 100%;
+}
+.topics-creation label:after {
+    margin-top: 10px;
+}
+.collapsible.popout {
+    margin-top: 20px
+}
+.collapsible.popout li {
+    margin-bottom: 10px
+}
+.collapsible.popout li:last-of-type {
+    margin-bottom: 0px
+}
+.collapsible-header {
+    display: flex;
+    justify-content: space-between;
+}
+.collapsible-header .btn-floating:first-of-type{
+    margin-right: 10px;
+}
+.collapsible-header .btn-floating i {
+    margin: auto;
+}
