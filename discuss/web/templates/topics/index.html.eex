@@ -15,7 +15,7 @@
                         <span class="topic-item icon"><i class="fas fa-tasks"></i></span>
                         <span class="topic-item title"><%= topic.title %></span>
                     </div>
-                    <div>
+                    <div class="action-list">
                         <%= link to: topics_path(@conn, :edit, topic), class: "btn-floating btn red" do %>
                             <i class="material-icons">mode_edit</i>
                         <%= end %>

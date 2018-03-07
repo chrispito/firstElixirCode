@@ -48,6 +48,12 @@ main {
     display: flex;
     justify-content: space-between;
 }
+.collapsible-header.active .action-list {
+    display: block;
+}
+.collapsible-header .action-list {
+    display: none;
+}
 .collapsible-header .btn-floating:first-of-type{
     margin-right: 10px;
 }

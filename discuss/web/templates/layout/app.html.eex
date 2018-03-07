@@ -37,7 +37,7 @@
               <%= end %>
             </li>
             <li>
-              <a class="btn"><i class="fas fa-sign-in-alt"></i> Sign in with githup</a>
+              <a class="btn" href="/auth/github"><i class="fas fa-sign-in-alt"></i> Sign in with githup</a>
             </li>
           </ul>
         </div>

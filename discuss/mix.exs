@@ -20,7 +20,13 @@ defmodule Discuss.Mixfile do
   def application do
     [
       mod: {Discuss, []},
-      extra_applications: [:logger]
+      extra_applications: [
+        :logger, 
+        :ueberauth, 
+        :ueberauth_github, 
+        :ueberauth_google,
+        :ueberauth_facebook
+      ]
     ]
   end
 
@@ -40,7 +46,11 @@ defmodule Discuss.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:ueberauth, "~> 0.4"},
+      {:ueberauth_github, "~> 0.7"},
+      {:ueberauth_google, "~> 0.7"},
+      {:ueberauth_facebook, "~> 0.7"}
     ]
   end
 
