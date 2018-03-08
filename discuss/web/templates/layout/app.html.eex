@@ -37,7 +37,35 @@
               <%= end %>
             </li>
             <li>
-              <a class="btn" href="/auth/github"><i class="fas fa-sign-in-alt"></i> Sign in with githup</a>
+              <%= if @conn.assigns[:user] do %>
+                <a class='dropdown-button btn' href='#' data-activates='sing_out_dropdown'>
+                  <%= @conn.assigns[:user].name %>
+                </a>
+
+                <ul id='sing_out_dropdown' class='dropdown-content'>
+                    <%= link to: auth_path(@conn, :signout), class: "btn" do %>
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                  <%= end %>
+                </ul>
+                
+              <%= else %>
+                <a class='dropdown-button btn' href='#' data-activates='sing_in_dropdown'>
+                  <i class="fas fa-sign-in-alt"></i> Sign In
+                </a>
+
+                <ul id='sing_in_dropdown' class='dropdown-content'>
+                  <li>
+                    <%= link to: auth_path(@conn, :request, "github"), class: "btn green" do %>
+                       <i class="fab fa-github-square"></i> Github
+                    <%= end %>
+                  </li>
+                  <li>
+                    <%= link to: auth_path(@conn, :request, "facebook"), class: "btn yellow" do %>
+                      <i class="fas fa-facebook-square"></i> Facebook
+                    <%= end %>
+                  </li>
+                </ul>
+              <%= end %>
             </li>
           </ul>
         </div>

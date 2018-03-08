@@ -48,6 +48,10 @@ main {
     display: flex;
     justify-content: space-between;
 }
+.collapsible-header.own {
+    background-color: green;
+    color: white;
+}
 .collapsible-header.active .action-list {
     display: block;
 }
@@ -59,4 +63,15 @@ main {
 }
 .collapsible-header .btn-floating i {
     margin: auto;
+}
+#sing_in_dropdown, #sing_out_dropdown {
+    padding-top: 10px;
+}
+#sing_in_dropdown, #sing_out_dropdown,
+#sing_in_dropdown > li, #sing_out_dropdown > li {
+    width: auto !important;
+}
+#sing_in_dropdown > li > a, #sing_out_dropdown > li > a {
+    width: 200px;
+    color: white;
 }
