@@ -3,7 +3,7 @@
     <h2>Editing a Topic</h2>
     <%= link to: topics_path(@conn, :index), class: "btn lime" do %>
       Cancel
-    <%= end %>
+    <% end %>
   </div>
   <div class="col-md-12">
   <%= form_for @changeset, topics_path(@conn, :update, @topic), fn f -> %>

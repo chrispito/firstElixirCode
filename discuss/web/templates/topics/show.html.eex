@@ -1,0 +1,42 @@
+<div class="row topics-details">
+  <div class="col-md-12 head">
+    <h2><%= @topic.title %></h2>
+    <%= link to: topics_path(@conn, :index), class: "btn return-btn" do %>
+      Return
+    <% end %>
+  </div>
+  <div class="col-md-12">
+    <p>
+      <%= @topic.description %>
+    </p>
+  </div>
+  <%= if @conn.assigns.user do %>
+      <div class="col-md-12 m6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">Add Comment</span>
+            <textarea  id="comment-text" class="materialize-textarea" placeholder="Add your comment"></textarea>
+          </div>
+          <div class="card-action">
+            <button id="send-comment-button" class="btn">Send!</button>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  <%= if @topic.comments do %>
+    <div class="col-md-12" id="topic-comment-block">
+      <div class="cb-head">
+        <span>Comments</span>
+        <span></span>
+      </div>
+      <div class="cb-body">
+        <ul class="comment-list collection"></ul>
+      </div>
+    </div>
+  <% end %>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  window.createSocket(<%= @topic.id %>);
+});
+</script>

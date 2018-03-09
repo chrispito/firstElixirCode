@@ -21,6 +21,24 @@ defmodule Discuss.TopicsController do
     render conn, "index.html", topics: topics
   end
 
+  def show(conn, %{"id" => topic_id}) do
+    topic = Topic
+            |> Repo.get!(topic_id)
+            |> Repo.preload(:comments)
+            
+    changeset = Topic.changeset(topic)
+    # case Repo.get!(Topic, topic_id) do
+    #   {:ok, topic} ->
+    #     topic_to_show = topic 
+    #   {:error, changeset} ->
+    #     conn
+    #     |> put_flash(:error, "The Topic you are trying to see doesn't exist!")
+    #     |> redirect(to: topics_path(conn, :index))
+    # end
+    # render conn, "show.html", topic: topic_to_show
+    render conn, "show.html", changeset: changeset, topic: topic
+  end
+
   def new(conn, _params) do
     changeset = Topic.changeset(%Topic{}, %{})
     render conn, "new.html", changeset: changeset, title_error: nil, desc_error: nil, title_class: "form-controll", desc_class: "materialize-textarea"
@@ -39,23 +57,28 @@ defmodule Discuss.TopicsController do
                 |> Topic.changeset(topic)
 
     case Repo.insert(changeset) do
-      {:ok, topic} -> 
+      {:ok, _topic} -> 
         conn
         |> put_flash(:info, "You have successfully created a new Topic")
         |> redirect(to: topics_path(conn, :index))
       {:error, changeset} ->
-        case Keyword.has_key?(changeset.errors, :description) do
-          false -> desc_class = "materialize-textarea"
-          true -> 
-            [{desc_error, val}]  = Keyword.get_values(changeset.errors, :description)
-            desc_class = "materialize-textarea invalid"
-        end
-        case Keyword.has_key?(changeset.errors, :title) do
-          false -> title_class = "form-controll"
-          true -> 
-            [{title_error, val}] = Keyword.get_values(changeset.errors, :title)
-            title_class = "form-controll invalid"
-        end
+        [desc_class, desc_error] =
+          case Keyword.has_key?(changeset.errors, :description) do
+            false -> 
+              ["materialize-textarea", nil]
+            true -> 
+              [{desc_error, _val}]  = Keyword.get_values(changeset.errors, :description)
+              ["materialize-textarea invalid", desc_error]
+          end
+        
+        [title_class, title_error] =
+          case Keyword.has_key?(changeset.errors, :title) do
+            false -> 
+              ["form-controll", nil]
+            true -> 
+              [{title_error, _val}] = Keyword.get_values(changeset.errors, :title)
+              ["form-controll invalid", title_error]
+          end
         render conn, "new.html", changeset: changeset, title_error: title_error, desc_error: desc_error, title_class: title_class, desc_class: desc_class
     end
   end
@@ -64,23 +87,27 @@ defmodule Discuss.TopicsController do
     old_topic = Repo.get!(Topic, topic_id)
     changeset = Topic.changeset(old_topic, topic)
     case Repo.update(changeset) do
-      {:ok, topic} -> 
+      {:ok, _topic} -> 
         conn
         |> put_flash(:info, "You have successfully updated your Topic")
         |> redirect(to: topics_path(conn, :index))
       {:error, changeset} ->
-        case Keyword.has_key?(changeset.errors, :description) do
-          false -> desc_class = "materialize-textarea"
-          true -> 
-            [{desc_error, val}]  = Keyword.get_values(changeset.errors, :description)
-            desc_class = "materialize-textarea invalid"
-        end
-        case Keyword.has_key?(changeset.errors, :title) do
-          false -> title_class = "form-controll"
-          true -> 
-            [{title_error, val}] = Keyword.get_values(changeset.errors, :title)
-            title_class = "form-controll invalid"
-        end
+        [desc_class, desc_error] =
+          case Keyword.has_key?(changeset.errors, :description) do
+            false -> 
+              ["materialize-textarea", nil]
+            true -> 
+              [{desc_error, _val}]  = Keyword.get_values(changeset.errors, :description)
+              ["materialize-textarea invalid", desc_error]
+            end
+        [title_class, title_error] =
+          case Keyword.has_key?(changeset.errors, :title) do
+            false -> 
+              ["form-controll", nil]
+            true -> 
+              [{title_error, _val}] = Keyword.get_values(changeset.errors, :title)
+              ["form-controll invalid", title_error]
+          end
         render conn, "edit.html", changeset: changeset, topic: old_topic, title_error: title_error, desc_error: desc_error, title_class: title_class, desc_class: desc_class
     end
   end
@@ -95,9 +122,6 @@ defmodule Discuss.TopicsController do
   end
 
   def check_topic_owner(%{params: %{"id" => topic_id}} = conn, _params) do
-    IO.puts("++++++++++++++++++")
-    IO.inspect(topic_id)
-    IO.puts("++++++++end++++++++++")
     if Repo.get(Topic, topic_id).user_id == conn.assigns[:user].id do
       conn
     else

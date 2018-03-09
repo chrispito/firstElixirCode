@@ -29,7 +29,7 @@ defmodule Discuss.AuthController do
         |> put_flash(:info, "Welcome back")
         |> put_session(:user_id, user.id)
         |> redirect(to: topics_path(conn, :index))
-      {:ok, _reason} ->
+      {:error, _reason} ->
         conn
         |> put_flash(:error, "Error during Signing in")
         |> redirect(to: topics_path(conn, :index))

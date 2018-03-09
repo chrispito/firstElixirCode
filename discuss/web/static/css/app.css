@@ -1,5 +1,21 @@
 /* @import 'node_modules/font-awesome/scss/font-awesome' */
 
+.return-btn:hover {
+    background-color: rgb(26, 23, 23);
+    border-width: 0 0 4px 2px;
+    border-radius: 5px;
+    border-color: white;
+    border-style: solid;
+    color: white;
+}
+.return-btn {
+    background-color: transparent;
+    border-width: 0 0 4px 2px;
+    border-radius: 5px;
+    border-color: rgb(26, 23, 23);
+    border-style: solid;
+    color: rgb(26, 23, 23);
+}
 
 .container {
     max-width: 100%;
@@ -22,7 +38,8 @@ main {
 .topic-item.icon {
     margin-right: 5px;
 }
-.topics-creation > .head {
+.topics-creation > .head,
+.topics-details > .head {
     display: flex;
     justify-content: space-between;
 }
@@ -74,4 +91,42 @@ main {
 #sing_in_dropdown > li > a, #sing_out_dropdown > li > a {
     width: 200px;
     color: white;
+}
+.topics-details .collapsible {width: 100%}
+.topics-details .collapsible-header .material-icons {margin-right: 25px}
+#topic-comment-block .cb-head {
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+    background-color: #f05423;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.cb-head > span {
+    margin: auto  0px;
+    color: rgb(26, 23, 23);
+    font-weight: bold;
+}
+.cb-head > span:first-of-type {
+    font-size: 18px;
+}
+.cb-head > span:last-of-type {
+    font-size: 10px;
+}
+.cb-body .c-head {
+    background-color: rgb(69, 54, 53);
+    color: rgb(238, 238, 238);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.cb-body .c-body {
+    padding: 10px;
+    border-bottom: black solid 2px;
+}
+.autor-name {
+    font-weight: bold;
 }

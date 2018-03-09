@@ -4,7 +4,7 @@
         <%= link to: topics_path(@conn, :new), class: "btn" do %>
             <i class="fas fa-plus-circle"></i>
             Create a New Topic!
-        <%= end %>
+        <% end %>
 </div>
 <div class="topics-list-container">
     <ul class="collapsible popout" data-collapsible="accordion">
@@ -12,23 +12,26 @@
             <li>
                 <%= if (@conn.assigns.user && @conn.assigns.user.id) == topic.user_id do %>
                     <div class="collapsible-header own">
-                <%= else %>
+                <% else %>
                     <div class="collapsible-header">
-                <%= end %>
+                <% end %>
                         <div>
                             <span class="topic-item icon"><i class="fas fa-tasks"></i></span>
                             <span class="topic-item title"><%= topic.title %></span>
                         </div>
-                        <%= if (@conn.assigns.user && @conn.assigns.user.id) == topic.user_id do %>
-                            <div class="action-list">
+                        <div class="action-list">
+                            <%= link to: topics_path(@conn, :show, topic), class: "btn-floating btn blue" do %>
+                                <i class="fas fa-eye"></i>
+                            <% end %>
+                            <%= if (@conn.assigns.user && @conn.assigns.user.id) == topic.user_id do %>
                                 <%= link to: topics_path(@conn, :edit, topic), class: "btn-floating btn red" do %>
                                     <i class="material-icons">mode_edit</i>
-                                <%= end %>
+                                <% end %>
                                 <%= link to: topics_path(@conn, :delete, topic), method: :delete, class: "btn-floating btn red" do %>
                                     <i class="material-icons">close</i>
-                                <%= end %>
-                            </div>
-                        <%= end %>
+                                <% end %>
+                            <% end %>
+                        </div>
                     </div>
                 <div class="collapsible-body">
                     <span class="topic-item description">
